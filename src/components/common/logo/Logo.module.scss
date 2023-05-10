@@ -1,0 +1,23 @@
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--black);
+
+  &__icon {
+    display: inline-block;
+
+    margin-right: 11.27px;
+  }
+
+  &__name {
+    letter-spacing: -0.02em;
+
+    color: var(--black);
+
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 36px;
+  }
+}
