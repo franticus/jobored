@@ -6,8 +6,9 @@ import { Button } from '../common';
 
 export const Filters = () => {
   const [data, setData] = useState([
-    { value: 'Загрузка', title: 'Загрузка', label: 'Загрузка' },
+    { value: 'Загрузка', title: 'Загрузка'},
   ]);
+  const [currentSphereFilter, setCurrentSphereFilter] = useState<string | null>('');
   const [salaryFrom, setSalaryFrom] = useState<number | ''>();
   const [salaryTo, setSalaryTo] = useState<number | ''>();
   const spheresUrl =
@@ -27,20 +28,16 @@ export const Filters = () => {
   }, []);
 
   const onClickHandler = () => {
-    return console.log('onClick2');
+    return console.log('currentSphereFilter:', currentSphereFilter);
   };
 
   const resetHandler = () => {
-    return console.log('reset');
+    setCurrentSphereFilter('');
+    setSalaryFrom('');
+    setSalaryTo('');
+    console.log('reset');
+    return
   };
-
-  console.log(
-    data.map((sphere, i) => ({
-      label: sphere.title,
-      value: sphere.title,
-      title: sphere.title,
-    }))
-  );
 
   return (
     <div className={s.filters}>
@@ -85,6 +82,8 @@ export const Filters = () => {
             duration: 100,
             timingFunction: 'ease',
           }}
+          value={currentSphereFilter} 
+          onChange={setCurrentSphereFilter}
           data={data.map((sphere, i) => ({
             label: sphere.title,
             value: sphere.title,
@@ -112,7 +111,7 @@ export const Filters = () => {
             data-elem='salary-from-input'
           />
         </div>
-        <div>
+        <div className={s.salaryTo}>
           <NumberInput
             size='md'
             radius='md'

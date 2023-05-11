@@ -1,3 +1,4 @@
+/* stylelint-disable selector-class-pattern */
 .vacancy {
   display: flex;
   align-items: center;
@@ -74,8 +75,16 @@
   stroke: var(--primary);
 }
 
+.star_container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.star {
+  margin-bottom: 60px;
+}
+
 .star:hover svg {
   cursor: pointer;
-  fill: var(--primary);
   stroke: var(--primary);
 }
