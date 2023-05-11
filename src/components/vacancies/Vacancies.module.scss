@@ -1,21 +1,32 @@
-/* stylelint-disable property-no-vendor-prefix */
+/* stylelint-disable selector-class-pattern */
 .vacancies {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto minmax(320px, 1200px) auto;
+  gap: 40px 30px;
+  grid-template-areas: "filters vacanciesContainer vacanciesContainer";
+
   width: 100%;
 }
 
-li {
-  margin: 20px 0;
+.filters {
+  display: grid;
+  grid-area: filters;
 }
 
-.search {
-  display: flex;
-  align-items: center;
+.vacanciesContainer {
+  grid-area: vacanciesContainer;
+}
+
+@media (width <= 768px) {
+  .vacancies {
+    display: grid;
+    grid-template-columns: minmax(320px, 1fr);
+    grid-template-rows: 330px auto;
+    grid-template-areas: 
+      "filters"
+      "vacanciesContainer";
   
-  height: 48px;
-
-  padding: 8px 12px;
-
-  border: 1px solid var(--border-gray);
-  border-radius: 8px;
-  background: var(--white);
+    width: 100%;
+  }
 }

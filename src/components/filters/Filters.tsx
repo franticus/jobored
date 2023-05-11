@@ -8,7 +8,6 @@ export const Filters = () => {
   const [data, setData] = useState([
     { value: 'Загрузка', title: 'Загрузка', label: 'Загрузка' },
   ]);
-  console.log('data:', data);
   const [salaryFrom, setSalaryFrom] = useState<number | ''>();
   const [salaryTo, setSalaryTo] = useState<number | ''>();
   const spheresUrl =
@@ -31,6 +30,10 @@ export const Filters = () => {
     return console.log('onClick2');
   };
 
+  const resetHandler = () => {
+    return console.log('reset');
+  };
+
   console.log(
     data.map((sphere, i) => ({
       label: sphere.title,
@@ -41,12 +44,41 @@ export const Filters = () => {
 
   return (
     <div className={s.filters}>
-      <div className={s.title}>Фильтры</div>
+      <div className={s.top}>
+        <div className={s.title}>Фильтры</div>
+        <button className={s.reset} onClick={resetHandler}>
+          <span>Сбросить всё</span>
+          <svg
+            width='16'
+            height='16'
+            viewBox='0 0 16 16'
+            fill='none'
+            xmlns='http://www.w3.org/2000/svg'
+          >
+            <line
+              x1='11.7425'
+              y1='4.44219'
+              x2='4.44197'
+              y2='11.7427'
+              stroke='none'
+              strokeWidth='1.25'
+            ></line>
+            <line
+              x1='11.9013'
+              y1='11.7425'
+              x2='4.60082'
+              y2='4.44197'
+              stroke='none'
+              strokeWidth='1.25'
+            ></line>
+          </svg>
+        </button>
+      </div>
       <div className={s.spheres}>
         <div className={s.clause}>Отрасль</div>
         <Select
           placeholder='Выберите отрасль'
-          size='lg'
+          size='md'
           radius='md'
           transitionProps={{
             transition: 'pop-top-left',
@@ -69,7 +101,7 @@ export const Filters = () => {
         <div className={s.clause}>Оклад</div>
         <div className={s.salaryFrom}>
           <NumberInput
-            size='lg'
+            size='md'
             radius='md'
             value={salaryFrom}
             onChange={setSalaryFrom}
@@ -82,10 +114,11 @@ export const Filters = () => {
         </div>
         <div>
           <NumberInput
-            size='lg'
+            size='md'
             radius='md'
             value={salaryTo}
             onChange={setSalaryTo}
+            min={0}
             step={1000}
             placeholder='До'
             inputMode='numeric'

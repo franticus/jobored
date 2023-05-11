@@ -45,6 +45,8 @@
 
   &_active {
     color: var(--primary);
+    
+    font-weight: 500;
 
     &:not(:last-child) {
       margin-right: 40px;

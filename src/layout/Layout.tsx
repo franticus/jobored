@@ -1,13 +1,12 @@
 import React, { FC } from 'react';
 import { LayoutProps } from './LayoutProps';
-import { Header, Sidebar } from './index';
+import { Header } from './index';
 import s from './Layout.module.scss';
 
 const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <div className={s.wrapper}>
       <Header className={s.header} />
-      <Sidebar className={s.sidebar} />
       <div className={s.body}>{children}</div>
     </div>
   );

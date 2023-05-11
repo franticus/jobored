@@ -3,6 +3,7 @@ import s from './Vacancies.module.scss';
 import axios from 'axios';
 import { Search } from '../search/Search';
 import { Vacancy } from '../vacancy/Vacancy';
+import { Filters } from '../filters/Filters';
 
 interface IVacancies {
   profession: string;
@@ -42,11 +43,14 @@ export const Vacancies = () => {
 
   return (
     <div className={s.vacancies}>
-      <Search />
-      <ul>
+      <div className={s.filters}>
+        <Filters />
+      </div>
+      <div className={s.vacanciesContainer}>
+        <Search />
         {data.map((vacancy: IVacancies, i) => (
-          <Vacancy 
-            key={i} 
+          <Vacancy
+            key={i}
             profession={vacancy.profession}
             firm_name={vacancy.firm_name}
             town={vacancy.town}
@@ -56,7 +60,7 @@ export const Vacancies = () => {
             currency={vacancy.currency}
           />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
