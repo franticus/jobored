@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
+import { NumberInput, Select } from '@mantine/core';
 import s from './Filters.module.scss';
 import axios from 'axios';
 import { Button } from '../common';
 
 export const Filters = () => {
-  const [data, setData] = useState([{ title: 'Загрузка' }]);
-  const salaryFrom = [30000, 40000, 50000, 60000, 70000];
-  const salaryTo = [30000, 40000, 50000, 60000, 70000];
+  const [data, setData] = useState([{ value: 'loading', title: 'Загрузка' }]);
+  console.log('data:', data);
+  const [salaryFrom, setSalaryFrom] = useState<number | ''>(0);
+  const [salaryTo, setSalaryTo] = useState<number | ''>(0);
   const spheresUrl =
     'https://startup-summer-2023-proxy.onrender.com/2.0/catalogues';
 
@@ -32,39 +34,46 @@ export const Filters = () => {
       <div className={s.title}>Фильтры</div>
       <div className={s.spheres}>
         <div className={s.clause}>Отрасль</div>
-        <select className={s.select}>
-          <option value='' disabled selected>
-            Выберите отрасль
-          </option>
-          {data.map((sphere, i) => (
-            <option value='sphere.title' key={i}>
-              {sphere.title}
-            </option>
-          ))}
-        </select>
+        <Select
+          placeholder='Выберите отрасль'
+          size='lg'
+          radius='md'
+          maxDropdownHeight={400}
+          nothingFound="Nobody here"
+          transitionProps={{ transition: 'pop-top-left', duration: 100, timingFunction: 'ease' }}
+          data={data.map((sphere, i) => ({
+            value: sphere.title,
+            title: sphere.title,
+          }))}
+          styles={(theme) => ({
+            item: {
+              fontSize: 14,
+            },
+          })}
+        />
       </div>
       <div className={s.spheres}>
         <div className={s.clause}>Оклад</div>
-        <select className={s.select}>
-          <option value='' disabled selected>
-            От
-          </option>
-          {salaryFrom.map((salary, i) => (
-            <option value={salary} key={i}>
-              {salary}
-            </option>
-          ))}
-        </select>
-        <select className={s.select}>
-          <option value='' disabled selected>
-            До
-          </option>
-          {salaryTo.map((salary, i) => (
-            <option value={salary} key={i}>
-              {salary}
-            </option>
-          ))}
-        </select>
+        <div className={s.salaryFrom}>
+          <NumberInput
+            size='lg'
+            radius='md'
+            value={salaryFrom}
+            onChange={setSalaryFrom}
+            step={1000}
+            placeholder='От'
+          />
+        </div>
+        <div>
+          <NumberInput
+            size='lg'
+            radius='md'
+            value={salaryTo}
+            onChange={setSalaryTo}
+            step={1000}
+            placeholder='До'
+          />
+        </div>
       </div>
       <Button
         color='primary'

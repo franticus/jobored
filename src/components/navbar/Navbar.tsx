@@ -1,20 +1,28 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { Logo } from '../common';
 import s from './Navbar.module.scss';
-import cn from 'classnames';
 
 export const Navbar = () => {
   return (
-    <nav className={s.navbar}>
-      <Logo />
-      <div className={s.links}>
-        <a className={cn(s.link, s.selected)} href='/'>
-          Поиск вакансий
-        </a>
-        <a className={s.link} href='/'>
-          Избранное
-        </a>
-      </div>
-    </nav>
+    <>
+      <nav className={s.navbar}>
+        <Logo />
+        <div className={s.links}>
+          <NavLink
+            className={({ isActive }) => (isActive ? s.link_active : s.link)}
+            to='/vacancies'
+          >
+            Поиск вакансий
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? s.link_active : s.link)}
+            to='/favorite'
+          >
+            Избранное
+          </NavLink>
+        </div>
+      </nav>
+    </>
   );
 };

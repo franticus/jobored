@@ -29,10 +29,7 @@
 
   height: 40px;
 
-  transition: all 0.3s;
-
   color: var(--black);
-  border-bottom: 2px solid transparent;
 
   font-size: 16px;
   font-weight: 500;
@@ -45,8 +42,29 @@
   &:hover {
     color: var(--primary);
   }
+
+  &_active {
+    color: var(--primary);
+
+    &:not(:last-child) {
+      margin-right: 40px;
+    }
+  }
 }
 
-.selected {
-  color: var(--primary);
+@media (width <= 768px) {
+  .navbar {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    height: 100px;
+    
+    padding: 10px;
+  }
+
+  .links {
+    margin-left: 0;
+  }
 }

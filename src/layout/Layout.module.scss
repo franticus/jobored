@@ -27,10 +27,12 @@
 
 @media (width <= 768px) {
   .wrapper {
+    padding: 5px;
     grid-template-columns: minmax(320px, 1fr);
+    grid-template-rows: 75px 350px 1fr;
     grid-template-areas: 
       "header"
-      "body"
       "sidebar"
+      "body"
   }
 }

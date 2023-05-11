@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { LayoutProps } from './LayoutProps';
 import { Header, Sidebar } from './index';
-import s from './Layout.module.css';
+import s from './Layout.module.scss';
 
 const Layout: FC<LayoutProps> = ({ children }) => {
   return (
@@ -13,12 +13,14 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   );
 };
 
-export const withLayout = <T extends Record<string, unknown>>(Component: FC<T>) => {
+export const withLayout = <T extends Record<string, unknown>>(
+  Component: FC<T>
+) => {
   return function withLayoutComponent(props: T) {
     return (
-        <Layout>
-          <Component {...props} />
-        </Layout>
+      <Layout>
+        <Component {...props} />
+      </Layout>
     );
   };
 };
