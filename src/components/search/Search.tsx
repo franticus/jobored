@@ -1,6 +1,6 @@
 import s from './Search.module.scss';
 import { Button } from '../common';
-import searchIcon from './img/search-icon.svg';
+import { ReactComponent as SearchIcon } from './img/search-icon.svg';
 
 export const Search = () => {
   const onClickHandler = () => {
@@ -8,18 +8,20 @@ export const Search = () => {
   };
 
   return (
-    <div className={s.vacancies}>
-      <div className={s.search}>
-        <img src={searchIcon} alt='search' />
-        <input type='search' name='search' placeholder='Введите название ваканси' />
-        <div>
-          <Button
-            color='primary'
-            text='Поиск'
-            size='sm'
-            onClickHandler={onClickHandler}
-          />
-        </div>
+    <div className={s.search}>
+      <SearchIcon />
+      <input
+        type='search'
+        name='search'
+        placeholder='Введите название ваканси'
+      />
+      <div>
+        <Button
+          color='primary'
+          text='Поиск'
+          size='sm'
+          onClickHandler={onClickHandler}
+        />
       </div>
     </div>
   );

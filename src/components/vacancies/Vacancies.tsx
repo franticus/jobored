@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import s from './Vacancies.module.scss';
 import axios from 'axios';
 import { Search } from '../search/Search';
+import { Vacancy } from '../vacancy/Vacancy';
 
 interface IVacancies {
   profession: string;
@@ -46,16 +47,16 @@ export const Vacancies = () => {
       <Search />
       <ul>
         {data.map((vacancy: IVacancies, i) => (
-          <li key={i}>
-            {vacancy.profession}
-            {vacancy.firm_name}
-            {vacancy.firm_name}
-            {vacancy.town.title}
-            {vacancy.type_of_work.title}
-            {vacancy.payment_to}
-            {vacancy.payment_from}
-            {vacancy.currency}
-          </li>
+          <Vacancy 
+            key={i} 
+            profession={vacancy.profession}
+            firm_name={vacancy.firm_name}
+            town={vacancy.town}
+            type_of_work={vacancy.type_of_work}
+            payment_to={vacancy.payment_to}
+            payment_from={vacancy.payment_from}
+            currency={vacancy.currency}
+          />
         ))}
       </ul>
     </div>

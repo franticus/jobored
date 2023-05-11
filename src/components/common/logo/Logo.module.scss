@@ -5,13 +5,7 @@
 
   color: var(--black);
 
-  &__icon {
-    display: inline-block;
-
-    margin-right: 11.27px;
-  }
-
-  &__name {
+  &_name {
     letter-spacing: -0.02em;
 
     color: var(--black);
@@ -20,4 +14,10 @@
     font-weight: 600;
     line-height: 36px;
   }
+}
+
+.logo svg {
+  display: inline-block;
+  
+  margin-right: 11.27px;
 }
