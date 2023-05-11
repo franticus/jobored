@@ -23,13 +23,52 @@ export const Vacancy: FC<IVacancy> = (props) => {
     props;
   const [isChecked, setIsChecked] = useState(false);
 
+  const ot =
+    payment_from > 0 && payment_to > 0 ? (
+      <>
+        <span>от</span>&nbsp;
+      </>
+    ) : (
+      ''
+    );
+
+  const payment_from_text =
+    payment_from > 0 ? (
+      <>
+        <div>{payment_from}</div>&nbsp;
+      </>
+    ) : (
+      ''
+    );
+
+  const dash =
+    payment_from > 0 && payment_to > 0 ? (
+      <>
+        <span>-</span>&nbsp;
+      </>
+    ) : (
+      ''
+    );
+
+  const payment_to_text =
+    payment_to > 0 ? (
+      <>
+        <div>{payment_to}</div>&nbsp;
+      </>
+    ) : (
+      ''
+    );
+
   return (
     <div className={s.vacancy}>
       <div className={s.profession_container}>
         <div className={s.profession}>{profession}</div>
         <div className={s.payment_container}>
-          <span>з/п от</span>&nbsp;<div>{payment_from}</div>
-          <div>{payment_to}</div>
+          <span>з/п</span>&nbsp;
+          {ot}
+          {payment_from_text}
+          {dash}
+          {payment_to_text}
           <div>{currency}</div>
           <span className={s.dot}>•</span>
           <div className={s.type_of_work}>{type_of_work.title}</div>

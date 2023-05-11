@@ -5,10 +5,12 @@ import axios from 'axios';
 import { Button } from '../common';
 
 export const Filters = () => {
-  const [data, setData] = useState([{ value: 'loading', title: 'Загрузка' }]);
+  const [data, setData] = useState([
+    { value: 'Загрузка', title: 'Загрузка', label: 'Загрузка' },
+  ]);
   console.log('data:', data);
-  const [salaryFrom, setSalaryFrom] = useState<number | ''>(0);
-  const [salaryTo, setSalaryTo] = useState<number | ''>(0);
+  const [salaryFrom, setSalaryFrom] = useState<number | ''>();
+  const [salaryTo, setSalaryTo] = useState<number | ''>();
   const spheresUrl =
     'https://startup-summer-2023-proxy.onrender.com/2.0/catalogues';
 
@@ -29,6 +31,14 @@ export const Filters = () => {
     return console.log('onClick2');
   };
 
+  console.log(
+    data.map((sphere, i) => ({
+      label: sphere.title,
+      value: sphere.title,
+      title: sphere.title,
+    }))
+  );
+
   return (
     <div className={s.filters}>
       <div className={s.title}>Фильтры</div>
@@ -38,10 +48,13 @@ export const Filters = () => {
           placeholder='Выберите отрасль'
           size='lg'
           radius='md'
-          maxDropdownHeight={400}
-          nothingFound="Nobody here"
-          transitionProps={{ transition: 'pop-top-left', duration: 100, timingFunction: 'ease' }}
+          transitionProps={{
+            transition: 'pop-top-left',
+            duration: 100,
+            timingFunction: 'ease',
+          }}
           data={data.map((sphere, i) => ({
+            label: sphere.title,
             value: sphere.title,
             title: sphere.title,
           }))}
@@ -60,8 +73,11 @@ export const Filters = () => {
             radius='md'
             value={salaryFrom}
             onChange={setSalaryFrom}
+            min={0}
             step={1000}
             placeholder='От'
+            inputMode='numeric'
+            data-elem='salary-from-input'
           />
         </div>
         <div>
@@ -72,6 +88,8 @@ export const Filters = () => {
             onChange={setSalaryTo}
             step={1000}
             placeholder='До'
+            inputMode='numeric'
+            data-elem='salary-to-input'
           />
         </div>
       </div>

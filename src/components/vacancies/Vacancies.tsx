@@ -33,8 +33,6 @@ export const Vacancies = () => {
         },
       })
       .then((res) => {
-        console.log('response: ', res.data.objects);
-        // console.log('response: ', res.data.objects[0].catalogues[0].title);
         setData(res.data.objects);
       })
       .catch((err) => {
