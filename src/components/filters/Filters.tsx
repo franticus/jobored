@@ -4,6 +4,8 @@ import s from './Filters.module.scss';
 import axios from 'axios';
 import { Button } from '../common';
 import { URL } from '../../constants/urls';
+import { ReactComponent as ArrowIcon } from './img/arrow-select.svg';
+import { url } from 'inspector';
 
 export const Filters = (props) => {
   const { sphereKeyChanger } = props;
@@ -82,9 +84,10 @@ export const Filters = (props) => {
           placeholder='Выберите отрасль'
           size='md'
           radius='md'
+          rightSection={<ArrowIcon />}
           transitionProps={{
-            transition: 'pop-top-left',
-            duration: 100,
+            transition: 'scale-y',
+            duration: 300,
             timingFunction: 'ease',
           }}
           value={currentSphereFilter}
@@ -97,7 +100,11 @@ export const Filters = (props) => {
           styles={(theme) => ({
             item: {
               fontSize: 14,
+              textOverflow: 'ellipsis',
+              overflow: 'hidden',
+              width: '220px',
             },
+            rightSection: { pointerEvents: 'none' },
           })}
         />
       </div>
@@ -114,6 +121,21 @@ export const Filters = (props) => {
             placeholder='От'
             inputMode='numeric'
             data-elem='salary-from-input'
+            styles={(theme) => ({
+              rightSection: {},
+              controlUp: {
+                flex: 0,
+                marginTop: '5px',
+                color: '#ACADB9',
+                border: 'transparent',
+              },
+              controlDown: {
+                flex: 0,
+                marginBottom: '10px',
+                color: '#ACADB9',
+                border: 'transparent',
+              },
+            })}
           />
         </div>
         <div className={s.salaryTo}>
@@ -127,6 +149,21 @@ export const Filters = (props) => {
             placeholder='До'
             inputMode='numeric'
             data-elem='salary-to-input'
+            styles={(theme) => ({
+              rightSection: {},
+              controlUp: {
+                flex: 0,
+                marginTop: '5px',
+                color: '#ACADB9',
+                border: 'transparent',
+              },
+              controlDown: {
+                flex: 0,
+                marginBottom: '10px',
+                color: '#ACADB9',
+                border: 'transparent',
+              },
+            })}
           />
         </div>
       </div>

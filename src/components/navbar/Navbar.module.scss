@@ -1,4 +1,6 @@
 .navbar {
+  position: relative;
+
   display: grid;
   grid-template-columns: 315px minmax(320px, 1200px) auto;
 
@@ -13,9 +15,27 @@
   border-radius: 8px;
 
   background: var(--white);
+
+  &::after {
+    position: absolute;
+
+    top: 0;
+
+    left: -100%;
+
+    width: 200vw;
+
+    height: 84px;
+
+    content: "";
+    
+    background: var(--white);
+  }
 }
 
 .links {
+  z-index: 3;
+
   display: flex;
   align-items: center;
 

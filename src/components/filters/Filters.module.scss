@@ -1,6 +1,6 @@
 /* stylelint-disable selector-class-pattern */
 .filters {
-  width: 100%;
+  width: 315px;
   max-height: 360px;
   
   margin: 0 auto;
@@ -95,4 +95,10 @@
 
 .reset:active > svg > line {
   stroke: var(--primary);
+}
+
+@media (width <= 768px) {
+  .filters {
+    width: 100%;
+  }
 }

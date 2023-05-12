@@ -3,7 +3,7 @@
   display: grid;
   grid-template-rows: auto 1fr;
   grid-template-columns: auto 315px minmax(320px, 1200px) auto;
-  gap: 40px 30px;
+  gap: 40px 28px;
   grid-template-areas: 
     ". header header ."
     ". body body .";
