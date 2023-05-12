@@ -1,7 +1,7 @@
 .logo {
-  display: flex;
+  display: grid;
   align-items: center;
-  justify-content: center;
+  grid-template-columns: auto 1fr;
 
   color: var(--black);
 

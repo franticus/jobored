@@ -3,32 +3,37 @@ import { NumberInput, Select } from '@mantine/core';
 import s from './Filters.module.scss';
 import axios from 'axios';
 import { Button } from '../common';
+import { URL } from '../../constants/urls';
 
-export const Filters = () => {
+export const Filters = (props) => {
+  const { sphereKeyChanger } = props;
   const [data, setData] = useState([
-    { value: 'Загрузка', title: 'Загрузка'},
+    { value: false, title: 'Загрузка', key: 0 },
   ]);
-  const [currentSphereFilter, setCurrentSphereFilter] = useState<string | null>('');
+  const [currentSphereFilter, setCurrentSphereFilter] = useState<string | null>(
+    ''
+  );
   const [salaryFrom, setSalaryFrom] = useState<number | ''>();
   const [salaryTo, setSalaryTo] = useState<number | ''>();
-  const spheresUrl =
-    'https://startup-summer-2023-proxy.onrender.com/2.0/catalogues';
 
   useEffect(() => {
-    axios
-      .get(spheresUrl, {
-        headers: { 'x-secret-key': 'GEU4nvd3rej*jeh.eqp' },
-      })
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    if (data.length === 1) {
+      axios
+        .get(URL.SPHERES, {
+          headers: { 'x-secret-key': 'GEU4nvd3rej*jeh.eqp' },
+        })
+        .then((res) => {
+          setData(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [data]);
 
   const onClickHandler = () => {
-    return console.log('currentSphereFilter:', currentSphereFilter);
+    const findSphereKey = data.find((e) => e.title === currentSphereFilter);
+    sphereKeyChanger(findSphereKey?.key);
   };
 
   const resetHandler = () => {
@@ -36,7 +41,7 @@ export const Filters = () => {
     setSalaryFrom('');
     setSalaryTo('');
     console.log('reset');
-    return
+    return;
   };
 
   return (
@@ -82,7 +87,7 @@ export const Filters = () => {
             duration: 100,
             timingFunction: 'ease',
           }}
-          value={currentSphereFilter} 
+          value={currentSphereFilter}
           onChange={setCurrentSphereFilter}
           data={data.map((sphere, i) => ({
             label: sphere.title,

@@ -5,6 +5,7 @@ import { Search } from '../search/Search';
 import { Vacancy } from '../vacancy/Vacancy';
 import { Filters } from '../filters/Filters';
 import { URL } from '../../constants/urls';
+import { Pagination } from '@mantine/core';
 
 interface IVacancies {
   profession: string;
@@ -22,10 +23,13 @@ interface IVacancies {
 
 export const Vacancies = () => {
   const [data, setData] = useState([]);
+  const [shpereKey, setShpereKey] = useState<number | undefined>(33);
+  const [activePage, setPage] = useState<number | undefined>(1);
+  // const [favorite, setFavorite] = useState();
 
   useEffect(() => {
     axios
-      .get(URL.VACANCIES, {
+      .get(`${URL.VACANCIES}&catalogues=${shpereKey}&page=${activePage}`, {
         headers: {
           'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
           'X-Api-App-Id':
@@ -33,18 +37,17 @@ export const Vacancies = () => {
         },
       })
       .then((res) => {
-        console.log('res.data.objects:', res.data.objects);
         setData(res.data.objects);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [shpereKey, activePage]);
 
   return (
     <div className={s.vacancies}>
       <div className={s.filters}>
-        <Filters />
+        <Filters sphereKeyChanger={setShpereKey} />
       </div>
       <div className={s.vacanciesContainer}>
         <Search />
@@ -60,6 +63,15 @@ export const Vacancies = () => {
             currency={vacancy.currency}
           />
         ))}
+      </div>
+      <div className={s.paginate}>
+        <Pagination
+          total={125}
+          boundaries={0}
+          defaultValue={1}
+          value={activePage}
+          onChange={setPage}
+        />
       </div>
     </div>
   );
