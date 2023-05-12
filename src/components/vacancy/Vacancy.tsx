@@ -64,13 +64,19 @@ export const Vacancy: FC<IVacancy> = (props) => {
       <div className={s.profession_container}>
         <div className={s.profession}>{profession}</div>
         <div className={s.payment_container}>
-          <span>з/п</span>&nbsp;
-          {ot}
-          {payment_from_text}
-          {dash}
-          {payment_to_text}
-          <div>{currency}</div>
-          <span className={s.dot}>•</span>
+          {
+            payment_to > 0 && payment_to > 0 && (
+              <>
+                <span>з/п</span>&nbsp;
+                {ot}
+                {payment_from_text}
+                {dash}
+                {payment_to_text}
+                {currency}
+                <span className={s.dot}>•</span>
+              </>
+            )
+          }
           <div className={s.type_of_work}>{type_of_work.title}</div>
         </div>
         <div className={s.location}>
