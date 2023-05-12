@@ -2,7 +2,7 @@
 .wrapper {
   display: grid;
   grid-template-rows: auto 1fr;
-  grid-template-columns: auto 315px minmax(320px, 1200px) auto;
+  grid-template-columns: auto 315px minmax(320px, 800px) auto;
   gap: 40px 28px;
   grid-template-areas: 
     ". header header ."
