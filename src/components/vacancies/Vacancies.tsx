@@ -51,13 +51,16 @@ export const Vacancies = () => {
   const sphereKeyChanger = (key: number) => {
     console.log('key:', key);
     setIsLoading(true);
-    setShpereKey(key)
-  }
+    setShpereKey(key);
+  };
 
   return (
     <div className={s.vacancies}>
       <div className={s.filters}>
         <Filters sphereKeyChanger={(key: number) => sphereKeyChanger(key)} />
+      </div>
+      <div className={s.vacanciesContainer}>
+        <Search />
       </div>
       {isLoading ? (
         <Loader />

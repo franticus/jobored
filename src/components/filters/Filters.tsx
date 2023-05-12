@@ -89,6 +89,7 @@ export const Filters = (props) => {
             duration: 300,
             timingFunction: 'ease',
           }}
+          maxDropdownHeight={400}
           value={currentSphereFilter}
           onChange={setCurrentSphereFilter}
           data={data.map((sphere, i) => ({
@@ -97,11 +98,13 @@ export const Filters = (props) => {
             title: sphere.title,
           }))}
           styles={(theme) => ({
+            itemsWrapper: {
+              width: '250px',
+            },
             item: {
               fontSize: 14,
               textOverflow: 'ellipsis',
               overflow: 'hidden',
-              width: '220px',
             },
             rightSection: { pointerEvents: 'none' },
           })}

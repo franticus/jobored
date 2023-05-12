@@ -1,4 +1,8 @@
 body {
+  position: relative;
+  
+  overflow-x: hidden;
+
   margin: 0;
 
   background: var(--bg-light-gray);
