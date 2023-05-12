@@ -1,16 +1,13 @@
 import React from 'react';
 import './App.scss';
-import {
-  Favorite,
-  Vacancies,
-  NotFound
-} from './components';
+import { Favorite, Vacancies, NotFound } from './components';
 import { withLayout } from './layout/Layout';
 import { Route, Routes } from 'react-router-dom';
 
 const App = () => {
+
   return (
-    <div className="app">
+    <div className='app'>
       <Routes>
         <Route path='/' element={<Vacancies />} />
         <Route path='/vacancies' element={<Vacancies />} />
@@ -19,6 +16,6 @@ const App = () => {
       </Routes>
     </div>
   );
-}
+};
 
 export default withLayout(App);

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Search } from '../search/Search';
 import { Vacancy } from '../vacancy/Vacancy';
 import { Filters } from '../filters/Filters';
+import { URL } from '../../constants/urls';
 
 interface IVacancies {
   profession: string;
@@ -21,12 +22,10 @@ interface IVacancies {
 
 export const Vacancies = () => {
   const [data, setData] = useState([]);
-  const vacanciesUrl =
-    'https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=10&client_secret=v3.r.137440105.341ef00d2e927f8d6623c79f2624d0efb95d624b.9e2bbefe9835d4ae910cdc6d51381dade19d493c';
 
   useEffect(() => {
     axios
-      .get(vacanciesUrl, {
+      .get(URL.VACANCIES, {
         headers: {
           'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
           'X-Api-App-Id':
@@ -34,6 +33,7 @@ export const Vacancies = () => {
         },
       })
       .then((res) => {
+        console.log('res.data.objects:', res.data.objects);
         setData(res.data.objects);
       })
       .catch((err) => {
