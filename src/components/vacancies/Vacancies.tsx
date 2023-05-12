@@ -6,6 +6,7 @@ import { Vacancy } from '../vacancy/Vacancy';
 import { Filters } from '../filters/Filters';
 import { URL } from '../../constants/urls';
 import { Pagination } from '@mantine/core';
+import Loader from '../common/loader/Loader';
 
 interface IVacancies {
   profession: string;
@@ -25,6 +26,8 @@ export const Vacancies = () => {
   const [data, setData] = useState([]);
   const [shpereKey, setShpereKey] = useState<number | undefined>(33);
   const [activePage, setPage] = useState<number | undefined>(1);
+  const [isLoading, setIsLoading] = useState(true);
+  console.log('isLoading:', isLoading);
   // const [favorite, setFavorite] = useState();
 
   useEffect(() => {
@@ -38,41 +41,54 @@ export const Vacancies = () => {
       })
       .then((res) => {
         setData(res.data.objects);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [shpereKey, activePage]);
 
+  const sphereKeyChanger = (key: number) => {
+    console.log('key:', key);
+    setIsLoading(true);
+    setShpereKey(key)
+  }
+
   return (
     <div className={s.vacancies}>
       <div className={s.filters}>
-        <Filters sphereKeyChanger={setShpereKey} />
+        <Filters sphereKeyChanger={(key: number) => sphereKeyChanger(key)} />
       </div>
-      <div className={s.vacanciesContainer}>
-        <Search />
-        {data.map((vacancy: IVacancies, i) => (
-          <Vacancy
-            key={i}
-            profession={vacancy.profession}
-            firm_name={vacancy.firm_name}
-            town={vacancy.town}
-            type_of_work={vacancy.type_of_work}
-            payment_to={vacancy.payment_to}
-            payment_from={vacancy.payment_from}
-            currency={vacancy.currency}
-          />
-        ))}
-      </div>
-      <div className={s.paginate}>
-        <Pagination
-          total={125}
-          boundaries={0}
-          defaultValue={1}
-          value={activePage}
-          onChange={setPage}
-        />
-      </div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <div className={s.vacanciesContainer}>
+            <Search />
+            {data.map((vacancy: IVacancies, i) => (
+              <Vacancy
+                key={i}
+                profession={vacancy.profession}
+                firm_name={vacancy.firm_name}
+                town={vacancy.town}
+                type_of_work={vacancy.type_of_work}
+                payment_to={vacancy.payment_to}
+                payment_from={vacancy.payment_from}
+                currency={vacancy.currency}
+              />
+            ))}
+          </div>
+          <div className={s.paginate}>
+            <Pagination
+              total={125}
+              boundaries={0}
+              defaultValue={1}
+              value={activePage}
+              onChange={setPage}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };

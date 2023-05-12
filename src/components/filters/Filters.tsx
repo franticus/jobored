@@ -5,7 +5,6 @@ import axios from 'axios';
 import { Button } from '../common';
 import { URL } from '../../constants/urls';
 import { ReactComponent as ArrowIcon } from './img/arrow-select.svg';
-import { url } from 'inspector';
 
 export const Filters = (props) => {
   const { sphereKeyChanger } = props;
