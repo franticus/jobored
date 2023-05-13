@@ -18,19 +18,21 @@ export const Filters = (props) => {
   const [salaryTo, setSalaryTo] = useState<number | ''>();
 
   useEffect(() => {
-    if (data.length === 1) {
-      axios
-        .get(`${URL.MAIN}${URL.SPHERES}`, {
-          headers: { 'x-secret-key': 'GEU4nvd3rej*jeh.eqp' },
-        })
-        .then((res) => {
-          setData(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [data]);
+    axios
+      .get(`${URL.MAIN}${URL.SPHERES}`, {
+        headers: {
+          'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
+          'X-Api-App-Id':
+            'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948',
+        },
+      })
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const onClickHandler = () => {
     const findSphereKey = data.find((e) => e.title === currentSphereFilter);

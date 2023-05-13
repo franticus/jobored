@@ -67,6 +67,7 @@ export const Vacancies = () => {
                 payment_to={vacancy.payment_to}
                 payment_from={vacancy.payment_from}
                 currency={vacancy.currency}
+                isCheckedDefault={false}
               />
             ))}
           </div>

@@ -4,5 +4,4 @@ export enum URL {
   SPHERES = 'catalogues/',
   PASSWORD = 'oauth2/password?login=sergei.stralenia@gmail.com&password=paralect123&client_id=2356',
   VACANCIES = 'vacancies/',
-  FAVORITES = 'favorites/',
 }
