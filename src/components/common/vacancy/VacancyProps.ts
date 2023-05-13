@@ -9,5 +9,5 @@ export interface IVacancy {
   };
   payment_to: number;
   payment_from: number;
-  currency: number;
+  currency: string;
 }

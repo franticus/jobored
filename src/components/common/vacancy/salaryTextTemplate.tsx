@@ -1,4 +1,8 @@
-export const salaryTextTemplate = (payment_from, payment_to, currency) => {
+export const salaryTextTemplate = (
+  payment_from: number,
+  payment_to: number,
+  currency: string
+) => {
   const ot =
     payment_from > 0 && payment_to > 0 ? (
       <>

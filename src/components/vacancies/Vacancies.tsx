@@ -1,32 +1,17 @@
 import { useState, useEffect } from 'react';
 import s from './Vacancies.module.scss';
 import axios from 'axios';
-import { Search, Vacancy } from '../common';
+import { IVacancy, Search, Vacancy } from '../common';
 import { Filters } from '../filters/Filters';
 import { URL } from '../../constants/urls';
 import { Pagination } from '@mantine/core';
 import Loader from '../common/loader/Loader';
-
-interface IVacancies {
-  profession: string;
-  firm_name: string;
-  town: {
-    title: string;
-  };
-  type_of_work: {
-    title: string;
-  };
-  payment_to: number;
-  payment_from: number;
-  currency: number;
-}
 
 export const Vacancies = () => {
   const [data, setData] = useState([]);
   const [shpereKey, setShpereKey] = useState<number | undefined>(33);
   const [activePage, setPage] = useState<number | undefined>(1);
   const [isLoading, setIsLoading] = useState(true);
-  console.log('isLoading:', isLoading);
   // const [favorite, setFavorite] = useState();
 
   useEffect(() => {
@@ -67,7 +52,7 @@ export const Vacancies = () => {
         <>
           <div className={s.vacanciesContainer}>
             <Search />
-            {data.map((vacancy: IVacancies, i) => (
+            {data.map((vacancy: IVacancy, i) => (
               <Vacancy
                 key={i}
                 profession={vacancy.profession}
