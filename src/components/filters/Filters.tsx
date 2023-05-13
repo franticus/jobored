@@ -11,7 +11,6 @@ export const Filters = (props) => {
   const [data, setData] = useState([
     { value: false, title: 'Загрузка', key: 0 },
   ]);
-  console.log('data:', data)
   const [currentSphereFilter, setCurrentSphereFilter] = useState<string | null>(
     ''
   );
@@ -19,7 +18,7 @@ export const Filters = (props) => {
   const [salaryTo, setSalaryTo] = useState<number | ''>();
 
   useEffect(() => {
-    if (data.length === 1) {
+    if (data[0].value === false) {
       axios
         .get(`${URL.MAIN}${URL.SPHERES}`, {
           headers: {
