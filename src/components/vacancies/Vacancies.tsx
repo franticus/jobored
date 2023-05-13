@@ -13,7 +13,6 @@ export const Vacancies = () => {
   const [shpereKey, setShpereKey] = useState<number | undefined>(33);
   const [activePage, setPage] = useState<number | undefined>(1);
   const [isLoading, setIsLoading] = useState(true);
-  // const [favorite, setFavorite] = useState();
 
   useEffect(() => {
     axios

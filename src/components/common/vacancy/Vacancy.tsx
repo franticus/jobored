@@ -7,17 +7,36 @@ import { salaryTextTemplate } from './salaryTextTemplate';
 import { IVacancy } from '../../../interfaces';
 
 export const Vacancy: FC<IVacancy> = (props) => {
-  const { profession, town, type_of_work, payment_to, payment_from, currency } =
-    props;
-  const [isChecked, setIsChecked] = useState(false);
+  const {
+    profession,
+    town,
+    type_of_work,
+    payment_to,
+    payment_from,
+    currency,
+    id,
+  } = props;
+  const [isChecked, setIsChecked] = useState<boolean>(false);
 
-  const checkAsFavorite = () => {
+  const localStorageFavoriteHandler = () => {
+    const favoriteLocal: any = localStorage.getItem('favoriteVacancies');
+    const favorite: number[] = JSON.parse(favoriteLocal) || [];
+    favorite.push(id);
+
     if (isChecked) {
-      setIsChecked(false)
+      setIsChecked(false);
+      localStorage.setItem(
+        'favoriteVacancies',
+        JSON.stringify(favorite.filter((el) => el !== id))
+      );
     } else {
-      setIsChecked(true)
+      setIsChecked(true);
+      localStorage.setItem(
+        'favoriteVacancies',
+        JSON.stringify(favorite.filter((el, id) => favorite.indexOf(el) === id))
+      );
     }
-  }
+  };
 
   return (
     <div className={s.vacancy}>
@@ -50,7 +69,7 @@ export const Vacancy: FC<IVacancy> = (props) => {
           className={cn(s.star, {
             [s.checked]: isChecked,
           })}
-          onClick={() => checkAsFavorite()}
+          onClick={() => localStorageFavoriteHandler()}
         >
           <StarIcon />
         </span>
