@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { LayoutProps } from './LayoutProps';
 import { Header } from './index';
 import s from './Layout.module.scss';
+import { LayoutProps } from '../interfaces';
 
 const Layout: FC<LayoutProps> = ({ children }) => {
   return (

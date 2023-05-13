@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import s from './Vacancies.module.scss';
 import axios from 'axios';
-import { IVacancy, Search, Vacancy } from '../common';
+import { Search, Vacancy } from '../common';
+import { IVacancy } from '../../interfaces';
 import { Filters } from '../filters/Filters';
 import { URL } from '../../constants/urls';
 import { Pagination } from '@mantine/core';
@@ -55,6 +56,7 @@ export const Vacancies = () => {
             {data.map((vacancy: IVacancy, i) => (
               <Vacancy
                 key={i}
+                id={vacancy.id}
                 profession={vacancy.profession}
                 firm_name={vacancy.firm_name}
                 town={vacancy.town}

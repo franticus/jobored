@@ -4,12 +4,20 @@ import { ReactComponent as StarIcon } from './img/star-icon.svg';
 import { ReactComponent as LocationIcon } from './img/location-icon.svg';
 import cn from 'classnames';
 import { salaryTextTemplate } from './salaryTextTemplate';
-import { IVacancy } from './VacancyProps';
+import { IVacancy } from '../../../interfaces';
 
 export const Vacancy: FC<IVacancy> = (props) => {
   const { profession, town, type_of_work, payment_to, payment_from, currency } =
     props;
   const [isChecked, setIsChecked] = useState(false);
+
+  const checkAsFavorite = () => {
+    if (isChecked) {
+      setIsChecked(false)
+    } else {
+      setIsChecked(true)
+    }
+  }
 
   return (
     <div className={s.vacancy}>
@@ -42,7 +50,7 @@ export const Vacancy: FC<IVacancy> = (props) => {
           className={cn(s.star, {
             [s.checked]: isChecked,
           })}
-          onClick={() => setIsChecked(!isChecked)}
+          onClick={() => checkAsFavorite()}
         >
           <StarIcon />
         </span>
