@@ -15,8 +15,9 @@ export const Vacancy: FC<IVacancy> = (props) => {
     payment_from,
     currency,
     id,
+    isCheckedDefault,
   } = props;
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [isChecked, setIsChecked] = useState<boolean>(isCheckedDefault || false);
 
   const localStorageFavoriteHandler = () => {
     const favoriteLocal: any = localStorage.getItem('favoriteVacancies');

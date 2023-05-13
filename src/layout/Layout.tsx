@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { Header } from './index';
 import s from './Layout.module.scss';
-import { LayoutProps } from '../interfaces';
+import { ILayoutProps } from '../interfaces';
 
-const Layout: FC<LayoutProps> = ({ children }) => {
+const Layout: FC<ILayoutProps> = ({ children }) => {
   return (
     <div className={s.wrapper}>
       <Header className={s.header} />

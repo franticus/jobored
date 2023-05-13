@@ -10,7 +10,7 @@ import { URL } from './constants/urls';
 const App = () => {
   useEffect(() => {
     axios
-      .get(URL.PASSWORD, {
+      .get(`${URL.MAIN}${URL.PASSWORD}${URL.CLIENT_SECRET}`, {
         headers: {
           'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
           'X-Api-App-Id':

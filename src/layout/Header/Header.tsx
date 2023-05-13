@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { HeaderProps } from '../../interfaces/propsInterfaces/HeaderProps';
+import { IHeaderProps } from '../../interfaces/propsInterfaces/HeaderProps';
 import { Navbar } from '../../components';
 
-export const Header: FC<HeaderProps> = ({ ...props }) => {
+export const Header: FC<IHeaderProps> = ({ ...props }) => {
   return (
   <div {...props}>
     <Navbar />

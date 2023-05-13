@@ -20,7 +20,7 @@ export const Filters = (props) => {
   useEffect(() => {
     if (data.length === 1) {
       axios
-        .get(URL.SPHERES, {
+        .get(`${URL.MAIN}${URL.SPHERES}`, {
           headers: { 'x-secret-key': 'GEU4nvd3rej*jeh.eqp' },
         })
         .then((res) => {

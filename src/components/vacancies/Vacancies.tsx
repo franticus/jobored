@@ -12,17 +12,21 @@ export const Vacancies = () => {
   const [data, setData] = useState([]);
   const [shpereKey, setShpereKey] = useState<number | undefined>(33);
   const [activePage, setPage] = useState<number | undefined>(1);
+  const countPagesOnPage = 4;
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios
-      .get(`${URL.VACANCIES}&catalogues=${shpereKey}&page=${activePage}`, {
-        headers: {
-          'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
-          'X-Api-App-Id':
-            'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948',
-        },
-      })
+      .get(
+        `${URL.MAIN}${URL.VACANCIES}?count=${countPagesOnPage}&catalogues=${shpereKey}&page=${activePage}`,
+        {
+          headers: {
+            'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
+            'X-Api-App-Id':
+              'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948',
+          },
+        }
+      )
       .then((res) => {
         setData(res.data.objects);
         setIsLoading(false);
