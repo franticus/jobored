@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.scss';
-import { Favorite, Vacancies, NotFound } from './components';
+import { Vacancies } from './components';
+import { Favorite, NotFound } from './pages';
 import { withLayout } from './layout/Layout';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';

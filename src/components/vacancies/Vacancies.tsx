@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import s from './Vacancies.module.scss';
 import axios from 'axios';
-import { Search } from '../search/Search';
-import { Vacancy } from '../vacancy/Vacancy';
+import { Search, Vacancy } from '../common';
 import { Filters } from '../filters/Filters';
 import { URL } from '../../constants/urls';
 import { Pagination } from '@mantine/core';

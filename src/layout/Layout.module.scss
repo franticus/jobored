@@ -6,7 +6,7 @@
   gap: 40px 28px;
   grid-template-areas: 
     ". header header ."
-    ". body body .";
+    ". main main .";
 
   min-height: 100vh;
 }
@@ -16,8 +16,8 @@
   grid-area: header;
 }
 
-.body {
-  grid-area: body;
+.main {
+  grid-area: main;
 }
 
 @media (width <= 768px) {
@@ -27,6 +27,6 @@
     grid-template-rows: 75px 350px 1fr;
     grid-template-areas: 
       "header"
-      "body"
+      "main"
   }
 }
