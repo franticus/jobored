@@ -6,19 +6,16 @@ import axios from 'axios';
 import { URL } from '../../constants/urls';
 import { Vacancy } from '../../components/common';
 import { IVacancy } from '../../interfaces';
+import { favoritesLocalStorage } from '../../helpers/favoritesLocalStorage';
 
 export const Favorite = () => {
-  const favoritesLocalStorage: any = localStorage.getItem('favoriteVacancies');
-  const favoritesParseArr = JSON.parse(favoritesLocalStorage);
   const [favoriteVacancies, setFavoriteVacancies] = useState([]);
 
   let idsUrl = '';
 
-  for (let i = 0; i < favoritesParseArr.length; i++) {
-    idsUrl += `ids[]=${favoritesParseArr[i]}&`;
+  for (let i = 0; i < favoritesLocalStorage().length; i++) {
+    idsUrl += `ids[]=${favoritesLocalStorage()[i]}&`;
   }
-
-  console.log('idsUrl:', idsUrl);
 
   useEffect(() => {
     if (idsUrl) {
@@ -31,7 +28,6 @@ export const Favorite = () => {
           },
         })
         .then((res) => {
-          console.log('Favorites: ', res.data.objects);
           setFavoriteVacancies(res.data.objects);
         })
         .catch((err) => {

@@ -7,13 +7,14 @@ import { Filters } from '../filters/Filters';
 import { URL } from '../../constants/urls';
 import { Pagination } from '@mantine/core';
 import Loader from '../common/loader/Loader';
+import { favoritesLocalStorage } from '../../helpers/favoritesLocalStorage';
 
 export const Vacancies = () => {
   const [data, setData] = useState([]);
   const [shpereKey, setShpereKey] = useState<number | undefined>(33);
   const [activePage, setPage] = useState<number | undefined>(1);
-  const countPagesOnPage = 4;
   const [isLoading, setIsLoading] = useState(true);
+  const countPagesOnPage = 4;
 
   useEffect(() => {
     axios
@@ -37,7 +38,6 @@ export const Vacancies = () => {
   }, [shpereKey, activePage]);
 
   const sphereKeyChanger = (key: number) => {
-    console.log('key:', key);
     setIsLoading(true);
     setShpereKey(key);
   };
@@ -67,7 +67,9 @@ export const Vacancies = () => {
                 payment_to={vacancy.payment_to}
                 payment_from={vacancy.payment_from}
                 currency={vacancy.currency}
-                isCheckedDefault={false}
+                isCheckedDefault={data.find(
+                  (vacancy: any) => vacancy.id === favoritesLocalStorage()[i]
+                )}
               />
             ))}
           </div>
