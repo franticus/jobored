@@ -5,6 +5,7 @@ import { ReactComponent as LocationIcon } from './img/location-icon.svg';
 import cn from 'classnames';
 import { salaryTextTemplate } from './salaryTextTemplate';
 import { IVacancy } from '../../../interfaces';
+import { NavLink } from 'react-router-dom';
 
 export const Vacancy: FC<IVacancy> = (props) => {
   const {
@@ -17,7 +18,9 @@ export const Vacancy: FC<IVacancy> = (props) => {
     id,
     isCheckedDefault,
   } = props;
-  const [isChecked, setIsChecked] = useState<boolean>(isCheckedDefault || false);
+  const [isChecked, setIsChecked] = useState<boolean>(
+    isCheckedDefault || false
+  );
 
   const localStorageFavoriteHandler = () => {
     const favoriteLocal: any = localStorage.getItem('favoriteVacancies');
@@ -42,7 +45,9 @@ export const Vacancy: FC<IVacancy> = (props) => {
   return (
     <div className={s.vacancy}>
       <div className={s.profession_container}>
-        <div className={s.profession}>{profession}</div>
+        <NavLink className={s.profession} to={`/vacancy/${id}`}>
+          {profession}
+        </NavLink>
         <div className={s.payment_container}>
           {payment_to > 0 && payment_to > 0 ? (
             <>

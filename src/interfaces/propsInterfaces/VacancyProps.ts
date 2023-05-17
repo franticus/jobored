@@ -1,7 +1,6 @@
 export interface IVacancy {
   id: number,
   profession: string;
-  firm_name: string;
   town: {
     title: string;
   };

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.scss';
 import { Vacancies } from './components';
-import { Favorite, NotFound } from './pages';
+import { Favorite, NotFound, VacancyPage } from './pages';
 import { withLayout } from './layout/Layout';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
@@ -31,6 +31,7 @@ const App = () => {
         <Route path='/' element={<Vacancies />} />
         <Route path='/vacancies' element={<Vacancies />} />
         <Route path='/favorite' element={<Favorite />} />
+        <Route path='/vacancy/*' element={<VacancyPage />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </div>

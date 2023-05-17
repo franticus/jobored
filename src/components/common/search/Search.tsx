@@ -8,6 +8,12 @@ export const Search = (props) => {
     onChangeKeywordsValue(search.current.value);
   };
 
+  search.current.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      onChangeKeywordsValue(search.current.value);
+    }
+  });
+
   return (
     <div className={s.searchBar}>
       <div className={s.searchBar_search}>

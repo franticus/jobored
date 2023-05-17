@@ -68,7 +68,6 @@ export const Vacancies = () => {
                 key={i}
                 id={vacancy.id}
                 profession={vacancy.profession}
-                firm_name={vacancy.firm_name}
                 town={vacancy.town}
                 type_of_work={vacancy.type_of_work}
                 payment_to={vacancy.payment_to}
