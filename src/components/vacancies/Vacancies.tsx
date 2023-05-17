@@ -11,7 +11,7 @@ import { favoritesLocalStorage } from '../../helpers/favoritesLocalStorage';
 
 export const Vacancies = () => {
   const [data, setData] = useState([]);
-  console.log('data:', data)
+  console.log('data:', data);
   const [totalVacanciesCount, setTotalVacanciesCount] = useState<number>(0);
   const [shpereKey, setShpereKey] = useState<number>(0);
   const [activePage, setPage] = useState<number | undefined>(1);
@@ -54,9 +54,11 @@ export const Vacancies = () => {
       <div className={s.filters}>
         <Filters sphereKeyChanger={(key: number) => sphereKeyChanger(key)} />
       </div>
-      <div className={s.vacanciesContainer}>
-        <Search onChangeKeywordsValue={setKeywordsValue} />
-      </div>
+      {isLoading && (
+        <div className={s.vacanciesContainer}>
+          <Search onChangeKeywordsValue={setKeywordsValue} />
+        </div>
+      )}
       {isLoading ? (
         <Loader />
       ) : (

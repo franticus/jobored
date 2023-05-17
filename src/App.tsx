@@ -18,7 +18,7 @@ const App = () => {
         },
       })
       .then((res) => {
-        console.log(res.data.access_token ? 'pass' : 'failed');
+        console.log(res.data.access_token ? 'access_token' : 'failed');
       })
       .catch((err) => {
         console.log(err);
