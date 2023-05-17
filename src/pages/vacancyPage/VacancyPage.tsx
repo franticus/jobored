@@ -6,6 +6,7 @@ import { URL } from '../../constants/urls';
 import { Vacancy, VacancyDescription } from '../../components/common';
 import { IVacancy } from '../../interfaces';
 import Loader from '../../components/common/loader/Loader';
+import { favoritesLocalStorage } from '../../helpers/favoritesLocalStorage';
 
 export const VacancyPage = () => {
   const link = window.location.href;
@@ -35,7 +36,6 @@ export const VacancyPage = () => {
         },
       })
       .then((res) => {
-        console.log('res:', res.data);
         setVacancyData(res.data);
         setIsLoading(false);
       })
@@ -58,9 +58,9 @@ export const VacancyPage = () => {
             payment_to={vacancyData.payment_to}
             payment_from={vacancyData.payment_from}
             currency={vacancyData.currency}
-            isCheckedDefault={false}
+            isCheckedDefault={favoritesLocalStorage().includes(vacancyData.id)}
           />
-          <VacancyDescription />
+          <VacancyDescription vacancyRichText={vacancyData.vacancyRichText} />
         </>
       )}
     </div>

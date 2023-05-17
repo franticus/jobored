@@ -18,13 +18,15 @@ export const Vacancies = () => {
   const [keywordsValue, setKeywordsValue] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
   const countPagesOnPage = 4;
-  const countPagesOnPageMoreThanOne = Math.floor(
-    totalVacanciesCount / countPagesOnPage
-  );
+  const countPagesOnPageMoreThanOne =
+    Math.floor(totalVacanciesCount / countPagesOnPage) > 1;
+  console.log('countPagesOnPageMoreThanOne:', countPagesOnPageMoreThanOne);
 
   const sphereKeyChanger = (key: number) => {
     setIsLoading(true);
     setShpereKey(key);
+    setKeywordsValue('');
+    setPage(1);
   };
 
   useEffect(() => {
@@ -54,33 +56,35 @@ export const Vacancies = () => {
       <div className={s.filters}>
         <Filters sphereKeyChanger={(key: number) => sphereKeyChanger(key)} />
       </div>
-      {isLoading && (
-        <div className={s.vacanciesContainer}>
-          <Search onChangeKeywordsValue={setKeywordsValue} />
-        </div>
-      )}
+      <div className={s.search}>
+        <Search onChangeKeywordsValue={setKeywordsValue} />
+      </div>
       {isLoading ? (
         <Loader />
       ) : (
         <>
-          <div className={s.vacanciesContainer}>
-            <Search onChangeKeywordsValue={setKeywordsValue} />
-            {data.map((vacancy: IVacancy, i) => (
-              <Vacancy
-                key={i}
-                id={vacancy.id}
-                profession={vacancy.profession}
-                town={vacancy.town}
-                type_of_work={vacancy.type_of_work}
-                payment_to={vacancy.payment_to}
-                payment_from={vacancy.payment_from}
-                currency={vacancy.currency}
-                isCheckedDefault={data.find(
-                  (vacancy: any) => vacancy.id === favoritesLocalStorage()[i]
-                )}
-              />
-            ))}
-          </div>
+          {data.length !== 0 && (
+            <div className={s.vacanciesContainer}>
+              {data.map((vacancy: IVacancy, i) => (
+                <Vacancy
+                  key={i}
+                  id={vacancy.id}
+                  profession={vacancy.profession}
+                  town={vacancy.town}
+                  type_of_work={vacancy.type_of_work}
+                  payment_to={vacancy.payment_to}
+                  payment_from={vacancy.payment_from}
+                  currency={vacancy.currency}
+                  isCheckedDefault={data.find(
+                    (vacancy: any) => vacancy.id === favoritesLocalStorage()[i]
+                  )}
+                />
+              ))}
+            </div>
+          )}
+          {data.length === 0 && (
+            <span className={s.notFound}>Ничего не найдено</span>
+          )}
           {countPagesOnPageMoreThanOne && (
             <div className={s.paginate}>
               <Pagination

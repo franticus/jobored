@@ -11,4 +11,5 @@ export interface IVacancy {
   payment_from: number;
   currency: string;
   isCheckedDefault?: boolean;
+  vacancyRichText?: any;
 }
