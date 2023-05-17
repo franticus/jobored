@@ -11,15 +11,26 @@ import { favoritesLocalStorage } from '../../helpers/favoritesLocalStorage';
 
 export const Vacancies = () => {
   const [data, setData] = useState([]);
-  const [shpereKey, setShpereKey] = useState<number | undefined>(33);
+  console.log('data:', data)
+  const [totalVacanciesCount, setTotalVacanciesCount] = useState<number>(0);
+  const [shpereKey, setShpereKey] = useState<number>(0);
   const [activePage, setPage] = useState<number | undefined>(1);
+  const [keywordsValue, setKeywordsValue] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
   const countPagesOnPage = 4;
+  const countPagesOnPageMoreThanOne = Math.floor(
+    totalVacanciesCount / countPagesOnPage
+  );
+
+  const sphereKeyChanger = (key: number) => {
+    setIsLoading(true);
+    setShpereKey(key);
+  };
 
   useEffect(() => {
     axios
       .get(
-        `${URL.MAIN}${URL.VACANCIES}?count=${countPagesOnPage}&catalogues=${shpereKey}&page=${activePage}`,
+        `${URL.MAIN}${URL.VACANCIES}?count=${countPagesOnPage}&catalogues=${shpereKey}&page=${activePage}&keyword=${keywordsValue}`,
         {
           headers: {
             'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
@@ -30,17 +41,13 @@ export const Vacancies = () => {
       )
       .then((res) => {
         setData(res.data.objects);
+        setTotalVacanciesCount(res.data.total);
         setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [shpereKey, activePage]);
-
-  const sphereKeyChanger = (key: number) => {
-    setIsLoading(true);
-    setShpereKey(key);
-  };
+  }, [shpereKey, activePage, isLoading, keywordsValue]);
 
   return (
     <div className={s.vacancies}>
@@ -48,14 +55,14 @@ export const Vacancies = () => {
         <Filters sphereKeyChanger={(key: number) => sphereKeyChanger(key)} />
       </div>
       <div className={s.vacanciesContainer}>
-        <Search />
+        <Search onChangeKeywordsValue={setKeywordsValue} />
       </div>
       {isLoading ? (
         <Loader />
       ) : (
         <>
           <div className={s.vacanciesContainer}>
-            <Search />
+            <Search onChangeKeywordsValue={setKeywordsValue} />
             {data.map((vacancy: IVacancy, i) => (
               <Vacancy
                 key={i}
@@ -73,15 +80,17 @@ export const Vacancies = () => {
               />
             ))}
           </div>
-          <div className={s.paginate}>
-            <Pagination
-              total={125}
-              boundaries={0}
-              defaultValue={1}
-              value={activePage}
-              onChange={setPage}
-            />
-          </div>
+          {countPagesOnPageMoreThanOne && (
+            <div className={s.paginate}>
+              <Pagination
+                total={Math.floor(totalVacanciesCount / 4)}
+                boundaries={0}
+                defaultValue={1}
+                value={activePage}
+                onChange={setPage}
+              />
+            </div>
+          )}
         </>
       )}
     </div>

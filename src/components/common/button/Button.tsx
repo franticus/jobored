@@ -14,7 +14,7 @@ export const Button: FC<IButton> = (props) => {
 
   return (
     <button
-      onClick={() => onClickHandler()}
+      onClick={onClickHandler}
       className={cn(s.button, {
         [s.primary]: color === 'primary',
         [s.lg]: size === 'lg',

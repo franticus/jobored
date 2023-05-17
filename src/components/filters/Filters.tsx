@@ -18,7 +18,7 @@ export const Filters = (props) => {
   const [salaryTo, setSalaryTo] = useState<number | ''>();
 
   useEffect(() => {
-    if (data[0].value === false) {
+    if (data[0].key === 0) {
       axios
         .get(`${URL.MAIN}${URL.SPHERES}`, {
           headers: {
@@ -38,7 +38,7 @@ export const Filters = (props) => {
 
   const onClickHandler = () => {
     const findSphereKey = data.find((e) => e.title === currentSphereFilter);
-    sphereKeyChanger(findSphereKey?.key);
+    sphereKeyChanger(findSphereKey?.key || 33);
   };
 
   const resetHandler = () => {
@@ -176,7 +176,7 @@ export const Filters = (props) => {
         color='primary'
         text='Применить'
         size='lg'
-        onClickHandler={() => onClickHandler()}
+        onClickHandler={onClickHandler}
       />
     </div>
   );
