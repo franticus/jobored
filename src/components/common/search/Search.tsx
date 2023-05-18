@@ -8,11 +8,12 @@ export const Search = (props) => {
     onChangeKeywordsValue(search.current.value);
   };
 
-  search.current && search.current.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      onChangeKeywordsValue(search.current.value);
-    }
-  });
+  search.current &&
+    search.current.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        onChangeKeywordsValue(search.current.value);
+      }
+    });
 
   return (
     <div className={s.searchBar}>
@@ -20,11 +21,11 @@ export const Search = (props) => {
         <div className={s.searchBar_searchLine}>
           <input
             ref={search}
-            data-elem={s.search_input}
             className={s.searchBar_input}
             type='search'
             autoComplete='off'
             placeholder='Введите название вакансии'
+            data-elem='search-input'
           />
         </div>
         <button

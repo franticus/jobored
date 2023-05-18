@@ -10,10 +10,16 @@ interface IButton {
 }
 
 export const Button: FC<IButton> = (props) => {
-  const { color = 'ghost', size = 'sm', text = 'Button', onClickHandler } = props;
+  const {
+    color = 'ghost',
+    size = 'sm',
+    text = 'Button',
+    onClickHandler,
+  } = props;
 
   return (
     <button
+      data-elem='search-button'
       onClick={onClickHandler}
       className={cn(s.button, {
         [s.primary]: color === 'primary',

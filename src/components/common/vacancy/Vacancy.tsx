@@ -43,7 +43,7 @@ export const Vacancy: FC<IVacancy> = (props) => {
   };
 
   return (
-    <div className={s.vacancy}>
+    <div className={s.vacancy} data-elem={`vacancy-${id}`}>
       <div className={s.profession_container}>
         <NavLink className={s.profession} to={`/vacancy/${id}`}>
           {profession}
@@ -71,6 +71,7 @@ export const Vacancy: FC<IVacancy> = (props) => {
       </div>
       <div className={s.star_container}>
         <span
+          data-elem={`vacancy-${id}-shortlist-button`}
           className={cn(s.star, {
             [s.checked]: isChecked,
           })}

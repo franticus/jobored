@@ -87,6 +87,7 @@ export const Filters = (props) => {
       <div className={s.spheres}>
         <div className={s.clause}>Отрасль</div>
         <Select
+          data-elem='industry-select'
           placeholder='Выберите отрасль'
           size='md'
           radius='md'
