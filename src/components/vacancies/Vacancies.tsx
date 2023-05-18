@@ -14,14 +14,15 @@ export const Vacancies = () => {
   console.log('data:', data);
   const [totalVacanciesCount, setTotalVacanciesCount] = useState<number>(0);
   const [shpereKey, setShpereKey] = useState<number>(0);
+  const [salaryFrom, setSalaryFrom] = useState<number | string>('');
+  const [salaryTo, setSalaryTo] = useState<number | string>('');
   const [activePage, setPage] = useState<number | undefined>(1);
   const [keywordsValue, setKeywordsValue] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
   const countPagesOnPage = 4;
   const countPagesOnPageMoreThanOne =
     Math.floor(totalVacanciesCount / countPagesOnPage) > 1;
-  console.log('countPagesOnPageMoreThanOne:', countPagesOnPageMoreThanOne);
-
+  
   const sphereKeyChanger = (key: number) => {
     setIsLoading(true);
     setShpereKey(key);
@@ -32,7 +33,8 @@ export const Vacancies = () => {
   useEffect(() => {
     axios
       .get(
-        `${URL.MAIN}${URL.VACANCIES}?count=${countPagesOnPage}&catalogues=${shpereKey}&page=${activePage}&keyword=${keywordsValue}`,
+        `${URL.MAIN}${URL.VACANCIES}?count=${countPagesOnPage}&page=${activePage}&catalogues=${shpereKey}&keyword=${keywordsValue}&payment_from=${salaryFrom}&payment_to=${salaryTo}&no_agreement=1
+        `,
         {
           headers: {
             'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
@@ -49,12 +51,22 @@ export const Vacancies = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [shpereKey, activePage, isLoading, keywordsValue]);
+  }, [shpereKey, activePage, isLoading, keywordsValue, salaryFrom, salaryTo]);
 
   return (
     <div className={s.vacancies}>
       <div className={s.filters}>
-        <Filters sphereKeyChanger={(key: number) => sphereKeyChanger(key)} />
+        <Filters
+          sphereKeyChanger={(key: number) => {
+            sphereKeyChanger(key);
+          }}
+          salaryToChanger={(payment_to: number | string) => {
+            setSalaryTo(payment_to);
+          }}
+          salaryFromChanger={(payment_from: number | string) => {
+            setSalaryFrom(payment_from);
+          }}
+        />
       </div>
       <div className={s.search}>
         <Search onChangeKeywordsValue={setKeywordsValue} />

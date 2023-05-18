@@ -7,15 +7,17 @@ import { URL } from '../../constants/urls';
 import { ReactComponent as ArrowIcon } from './img/arrow-select.svg';
 
 export const Filters = (props) => {
-  const { sphereKeyChanger } = props;
+  const { sphereKeyChanger, salaryToChanger, salaryFromChanger } = props;
   const [data, setData] = useState([
     { value: false, title: 'Загрузка', key: 0 },
   ]);
   const [currentSphereFilter, setCurrentSphereFilter] = useState<string | null>(
     ''
   );
-  const [salaryFrom, setSalaryFrom] = useState<number | ''>();
-  const [salaryTo, setSalaryTo] = useState<number | ''>();
+  const [salaryFrom, setSalaryFrom] = useState<number | ''>('');
+  console.log('salaryFrom:', salaryFrom);
+  const [salaryTo, setSalaryTo] = useState<number | ''>('');
+  console.log('salaryTo:', salaryTo);
 
   useEffect(() => {
     if (data[0].key === 0) {
@@ -39,6 +41,8 @@ export const Filters = (props) => {
   const onClickHandler = () => {
     const findSphereKey = data.find((e) => e.title === currentSphereFilter);
     sphereKeyChanger(findSphereKey?.key || 33);
+    salaryToChanger(salaryTo);
+    salaryFromChanger(salaryFrom);
   };
 
   const resetHandler = () => {
@@ -122,7 +126,7 @@ export const Filters = (props) => {
             value={salaryFrom}
             onChange={setSalaryFrom}
             min={0}
-            step={1000}
+            step={10000}
             placeholder='От'
             inputMode='numeric'
             data-elem='salary-from-input'
@@ -150,7 +154,7 @@ export const Filters = (props) => {
             value={salaryTo}
             onChange={setSalaryTo}
             min={0}
-            step={1000}
+            step={10000}
             placeholder='До'
             inputMode='numeric'
             data-elem='salary-to-input'

@@ -52,7 +52,6 @@ export const Vacancy: FC<IVacancy> = (props) => {
           {payment_to > 0 && payment_to > 0 ? (
             <>
               <div className={s.payment_container_salary}>
-                <span className={s.zp}>з/п</span>&nbsp;
                 {salaryTextTemplate(payment_from, payment_to, currency)}
               </div>
               <span className={s.dot}>•</span>
